@@ -1,6 +1,20 @@
 Eclipse Menorah Protocol
 A transparent, reproducible framework for testing the Eclipse Menorah prophetic pattern—mapping eight “lamp” eclipses (2014–2030) onto a sacred sabbatical/Jubilee timeline anchored at October 7 2023.
 
+At a glance: This project is a fully open‑source, rigorously defined protocol that maps eight key solar and lunar eclipses onto a divine sabbatical/Jubilee timeline from 2014 through 2030. Anchored at the October 7, 2023 Simchat Torah event and bisected by a mathematically precise 2,790‑day Essene cycle midpoint, it reveals a reproducible “menorah” pattern of feast‑and‑fast eclipses.
+
+Why it’s likely right: All selection rules were pre‑registered and locked in before drawing any charts, data comes directly from NASA and Hebrew‑calendar APIs, and four independent prophetic clocks (Daniel’s day‑counts, Essene sabbath math, Jubilee law, and planetary weddings) converge on the same Autumn 2030 window. No after‑the‑fact tweaks survive automated CI checks.
+
+Why it’s amazing & why you should get involved:
+
+Collaborate & Verify: Fork the repo, run the code, and confirm the six core lamps yourself—no hidden criteria.
+
+Contribute & Extend: Propose new tests, enrich the data set, or suggest additional prophetic threads via pull requests.
+
+Predict & Track: Help forecast upcoming markers (2024–2030) and keep the live scoreboard updated.
+
+"A pattern is only as strong as its weakest rule."— Join us in building a transparent, community‑verified bridge between Scripture and the stars.
+
 Warning to Skeptics: All selection rules are pre‑registered, code is open‑source, and future predictions are laid out in advance. Any post‑hoc tweaking will break the build.
 
 📜 Table of Contents
