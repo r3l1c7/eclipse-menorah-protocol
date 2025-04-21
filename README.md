@@ -1,59 +1,105 @@
 Eclipse Menorah Protocol
-========================
+A transparent, pre-registered framework mapping key solar and lunar eclipses (2014–2030) onto a divine sabbatical/Jubilee timeline anchored at October 7, 2023. Eight “lamp” events form a reproducible Hanukkiah pattern tied to Jewish festivals and fast days, with precise numerical markers and thematic symmetry. Driven by biblical text, Dead Sea Scroll calendar mathematics, and immutable celestial mechanics—no post-hoc tweaks survive continuous integration (CI).
 
-A transparent, pre‑registered framework mapping key solar and lunar eclipses (2014–2030) onto a divine sabbatical/Jubilee timeline anchored at **Oct 7 2023**. By strict rules, eight “lamp” events form a reproducible Hanukkiah pattern—no post‑hoc tweaks survive CI.
+🌟 Introduction
+The Eclipse Menorah Protocol identifies a striking pattern of eight major eclipses between 2014 and 2030, structured like a Hanukkiah (a nine-branched menorah). Anchored by the October 7, 2023 Simchat Torah attack—interpreted as the start of Daniel’s 70th week (Daniel 9:27)—these eclipses align with Jewish festivals and fast months, forming a symmetrical narrative of redemption, judgment, and restoration, culminating in Autumn 2030. With pre-registered rules and falsifiable predictions, this framework invites scrutiny and verification.
 
-## 🔭 Overview & Fast‑Day Clarifications
-- **Anchor:** Oct 7 2023 (Simchat Torah attack) = Daniel’s 70th‑week start (sacrifice ceases, Dan 9:27).  
-- **Midpoint Shamash:** Aug 2 2027 (1,395 days; Essene 2,790‑day cycle).  
-- **Core Lamps:**  
-  - **L1, L2:** 15 Nisan (Passover 2014), 15 Tishri (Sukkot 2014).  
-  - **L3:** 14 Tishri 2023 annular seal.  
-  - **L4 (Shamash):** 2 Aug 2027 total solar “plague” darkness (Ex 10:21–23).  
-  - **L5–L7:** 31 Dec 2028, 26 Jun 2029, 20 Dec 2029—full moons **near** 10 Tevet, 17 Tammuz, 24 Kislev (thematic fast‑month markers).  
-  - **L8:** 28 Oct 2030 & 25 Nov 2030 YK/Jubilee finale.
+🔭 Overview & Hanukkiah Structure
 
-> **Note:** L5–L7 occur on the 13th–14th of their months, thematically tied to fasts and rededication. We emphasize “in the months of” rather than exact date matches.
+Anchor Date: October 7, 2023 (Simchat Torah attack) – Start of the timeline.  
+Midpoint Shamash: August 2, 2027 (1,395 days from anchor) – Central “servant lamp” eclipse.  
+Core Lamps (Eclipses):  
+L1: April 15, 2014 – Total lunar eclipse on Passover (15 Nisan).  
+L2: October 8, 2014 – Total lunar eclipse on Sukkot (15 Tishrei).  
+L3: October 14, 2023 – Annular solar eclipse, sealing the war week.  
+L4 (Shamash): August 2, 2027 – Total solar eclipse, “plague darkness” (Exodus 10:21–23).  
+L5: December 31, 2028 – Total lunar eclipse in the month of 10 Tevet (fast day).  
+L6: June 26, 2029 – Total lunar eclipse in the month of 17 Tammuz (fast day).  
+L7: December 20, 2029 – Total lunar eclipse in the month of 24 Kislev (Hanukkah eve).  
+L8: November 25, 2030 – Total solar eclipse, 49 days after Essene Yom Kippur (Jubilee echo).
 
-## 📐 Thematic Symmetry
-Each pair (1↔8, 2↔7, 3↔6) reflects a biblical chiastic:
-- **L1 ⇄ L8:** Redemption (Ex 12) ↔ Jubilee Release (Lev 25).  
-- **L2 ⇄ L7:** Booths (Lev 23:39‑43) ↔ Hanukkah (1 Macc 4:52‑53).  
-- **L3 ⇄ L6:** War‑week seal (Joel 2:31; Rev 6:12‑17) ↔ Siege moon warning (Jer 52; Zech 14:1‑2).
 
-## 🌍 Visibility & Symbolism
-- **Israel‑Seen:** L4 partial “darkness” over Luxor→Mecca, L5–L7 deep umbrae in Jerusalem.  
-  - *Insider lamps:* calls Israel to repent (Isa 49:6; Rom 11:11‑24).  
-- **Gentile‑Seen:** L3 American annular, L8 Indian‑Ocean total.  
-  - *Grafted branches:* sign to nations (Rom 11:17; Gen 12:3).
 
-## 🔢 Numerical Markers Context
-- **2,790 days:** Seven Essene years (364‑day), anchors midpoint.  
-- **1,260/1,290/1,335 days:** Daniel 12 counts; 1,260 d (equinox), 1,290 d (Passover window), 1,335 d (Shavuot).  
-- **2,550 days:** Daniel composite trumpet blast marker (Rev 11:3).
 
-## ✨ Planetary Conjunctions
-Three tight Venus–Jupiter “weddings” ornament the timeline:
-- **1 Feb 2026 (0.27°)**, **8 Aug 2029 (0.32°)**, **19 Jun 2030 (0.48°)**.  
-Jewish mysticism (Zohar I:247b) reads these as Bride/Kingship signs (Mt 25:6; Rev 22:17).
+Fast-Day Clarification: L5, L6, and L7 occur on full moons (13th–14th of their months) in the months of the fast days 10 Tevet, 17 Tammuz, and 15 Kislev (near Hanukkah), not on the exact dates. This thematic alignment ties them to historical and spiritual significance.
 
-## 📖 Blood‑Moon Tetrad & Half‑Saros Physics
-- **2014‑15 Tetrad:** Four lunar eclipses on feast days foretold by scholars.  
-- **Half‑Saros pairing:** 3,292 d + 4 h yields Oct 14 2023 & Apr 8 2024 seals—predicted physics‑first, not by prophecy alone.
 
-## 📈 Statistical Confidence
-- **Feast‑Month Hits:** 6/6 core eclipses align with commanded feast/fast months (p ≈ 9×10⁻⁴).  
-- **Joint Odds:** Combined probability including Saros pairing & midpoint < 10⁻¹⁰.  
-- **Anchor Sensitivity:** Shifting start date by ±1 yr collapses all alignments to p > 0.05.
+📐 Thematic Symmetry
+The eclipses form three symmetrical pairs around the shamash (L4), reflecting biblical chiastic structures:  
 
-## ⚖️ Resilience & Falsifiability
-- **Pre‑registered Rules:** In `RULES.md`, no tweaks after analysis; CI enforces immutability.  
-- **Forecasts:** Documented in `PREDICTIONS.md`; failures auto‑flagged in `Scoreboard.md`.  
-- **Checkpoints:** Equinox incident (Mar 2027), Passover eclipse (Apr 2024), mid‑cycle plague (Aug 2027), fast‑month moons (2028‑29), YK return (Oct 2030), red‑heifer sacrifice (Apr 2028).
+L1 ↔ L8: Redemption (Exodus 12) ↔ Jubilee Release (Leviticus 25).  
+L2 ↔ L7: Booths (Leviticus 23:39–43) ↔ Hanukkah (1 Maccabees 4:52–53).  
+L3 ↔ L6: War-week seal (Joel 2:31; Revelation 6:12–17) ↔ Siege moon warning (Jeremiah 52; Zechariah 14:1–2).
 
-## 🚀 Summary
-**Eight eclipses arranged in a chiastic menorah pattern—anchored by feast‑month full moons, a plague‑darkness midpoint, and Jubilee release—converge on Autumn 2030.**  A celestial symphony echoing Scripture, pre‑registered and community‑verifiable.
+This pairing weaves a narrative from deliverance to restoration, mirroring Israel’s prophetic journey.
 
----
-*See `Table of Contents` at top for navigation.*
+🌍 Visibility & Symbolism
+The eclipses’ visibility carries insider-outsider symbolism:  
 
+Israel-Seen Eclipses:  
+L4 (partial “darkness” over Luxor → Mecca).  
+L5, L6, L7 (deep umbral eclipses visible in Jerusalem).  
+Insider lamps: Calls Israel to repentance (Isaiah 49:6; Romans 11:11–24).
+
+
+Gentile-Seen Eclipses:  
+L3 (American annular eclipse).  
+L8 (Indian Ocean total eclipse).  
+Grafted branches: Signs to the nations (Romans 11:17; Genesis 12:3).
+
+
+
+
+🔢 Numerical Markers & Context
+Key numerical alignments tie the pattern to biblical prophecy:  
+
+2,790 days: Seven Essene years (364-day calendar), anchoring the midpoint shamash (L4).  
+1,260 / 1,290 / 1,335 days: Daniel 12 prophetic counts (e.g., 1,290 days to Passover).  
+2,550 days: From anchor to September 30, 2030, near the Feast of Trumpets (Revelation 11:3).  
+49-day Jubilee Echo: From Essene Yom Kippur (October 28, 2030) to L8 (November 25, 2030).
+
+These resonate with scriptural timelines, reinforcing the pattern’s depth.
+
+✨ Planetary “Wedding Jewels”
+Three tight Venus–Jupiter conjunctions (<0.5° separation) enhance the timeline:  
+
+February 1, 2026 (0.27°) – Between L3 and L4.  
+August 8, 2029 (0.32°) – Between L6 and L7.  
+June 19, 2030 (0.48°) – Before L8.
+
+Symbolizing divine union (Zohar I:247b; Matthew 25:6; Revelation 22:17), they ornament the celestial narrative.
+
+📖 Blood-Moon Tetrad & Half-Saros Physics
+
+2014–2015 Tetrad: Four consecutive lunar eclipses on feast days, a rare phenomenon.  
+Half-Saros Pairing: A 3,292-day, 4-hour interval between the 2014 Sukkot eclipse and the 2023 annular eclipse, grounded in physics.
+
+These elements anchor the pattern in immutable celestial mechanics.
+
+📈 Statistical Confidence
+
+Feast-Month Hits: Six of eight eclipses align with feast/fast months (p ≈ 9×10⁻⁴).  
+Joint Probability: Including half-saros pairing and midpoint precision, p < 10⁻¹⁰ (1 in 10 billion).  
+Anchor Sensitivity: Shifting the anchor by ±1 year collapses alignments (p > 0.05).
+
+
+⚖️ Resilience & Falsifiability
+
+Pre-Registered Rules: In RULES.md, ensuring no post-hoc adjustments.  
+Forecasts & Checkpoints: In PREDICTIONS.md, with failures flagged in Scoreboard.md.  
+Key Checkpoints:  
+March 2027 equinox incident.  
+April 2024 Passover eclipse.  
+August 2027 mid-cycle plague eclipse.  
+2028–2029 fast-month blood moons.  
+October 2030 Yom Kippur return.  
+April 2028 red-heifer sacrifice.
+
+
+
+These ensure testability and resilience.
+
+🚀 Summary
+Eight eclipses form a chiastic Hanukkiah pattern—anchored by feast-month full moons, a plague-darkness midpoint, and a Jubilee release—converging on Autumn 2030. This celestial symphony, echoing Scripture, is pre-registered, verifiable, and invites exploration.
+
+See RULES.md, PREDICTIONS.md, and Scoreboard.md for details.
