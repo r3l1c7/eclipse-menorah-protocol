@@ -59,7 +59,7 @@ Jewish mystical texts (Sefer Raziel, Zohar I:247b) interpret these as Bride (V
   - Passover eclipse (Apr 2024)  
   - Mid‑cycle plague darkness (Aug 2027)  
   - Fast‑month full moons (2028–29)  
-  - Red heifer sacrifice (by Nisan 10 5788)  
+  - Red heifer sacrifice (before or on April 6, 2028)  
   - YK/Return event (Oct 6–7 2030)
 
 ## 🚀 Summary
