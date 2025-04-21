@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eclipse–Menorah Interactive Timeline (2014 – 2030)</title>
+  <script src="https://cdn.plot.ly/plotly-2.29.1.min.js"></script>
+  <style>
+    body{font-family: system-ui, sans-serif; margin:0; padding:2rem; background:#f9fafb}
+    #chart{width:100%; max-width:1200px; height:600px; margin:auto;}
+    h1{font-size:1.75rem; text-align:center; margin-bottom:0.5rem}
+    p.caption{font-size:0.875rem; text-align:center; color:#4b5563}
+  </style>
+</head>
+<body>
+  <h1>Eclipse & Prophetic‑Count Timeline 2014 → 2030</h1>
+  <p class="caption">Hover a marker for details • Drag to zoom • Scroll to pan</p>
+  <div id="chart"></div>
+
+<script>
+// === Data arrays ===
+const parseDate = d => new Date(d);
+// Major eclipse "lamps"
+const lamps = [
+  {d:"2014-04-15", label:"L1 • Total lunar – Passover"},
+  {d:"2014-10-08", label:"L2 • Total lunar – Sukkot"},
+  {d:"2023-10-14", label:"L3 • Annular solar – Ring‑of‑Fire"},
+  {d:"2027-08-02", label:"L4 • Total solar – Egypt darkness"},
+  {d:"2028-12-31", label:"L5 • Total lunar – 10 Tevet"},
+  {d:"2029-06-26", label:"L6 • Total lunar – 17 Tammuz"},
+  {d:"2029-12-20", label:"L7 • Total lunar – 24 Kislev"},
+  {d:"2030-11-25", label:"L8 • Total solar – Jubilee echo"}
+];
+
+// Daniel counts (start 2023‑10‑07)
+const daniel = [
+  {d:"2027-03-20", label:"1 260 d – Eq / 11 Adar II"},
+  {d:"2027-04-19", label:"1 290 d – 12 Nisan / Fast Firstborn"},
+  {d:"2027-06-03", label:"1 335 d – 27 Iyyar / Yom Yerushalayim +2"}
+];
+
+// Venus–Jupiter conjunctions
+const vj = [
+  {d:"2026-02-01", label:"Conj • 0.27°"},
+  {d:"2029-08-08", label:"Conj • 0.32°"},
+  {d:"2030-06-19", label:"Conj • 0.48°"}
+];
+
+// Helper to build trace
+function makeTrace(arr, y, marker, name){
+  return {
+    x: arr.map(o=>parseDate(o.d)),
+    y: Array(arr.length).fill(y),
+    text: arr.map(o=>o.label),
+    mode:"markers",
+    name,
+    hovertemplate:"%{text}<br>%{x|%d %b %Y}<extra></extra>",
+    marker
+  };
+}
+
+const data = [
+  makeTrace(lamps, 2, {size:14, color:"#f97316", symbol:"x"}, "Eclipse Lamps"),
+  makeTrace(daniel, 1, {size:12, color:"#10b981", symbol:"circle"}, "Daniel Counts"),
+  makeTrace(vj, 0, {size:10, color:"#3b82f6", symbol:"diamond"}, "Venus–Jupiter")
+];
+
+const layout = {
+  height:600,
+  yaxis:{
+    tickvals:[0,1,2],
+    ticktext:["Conjunctions","Daniel Counts","Eclipses"],
+    showgrid:false,
+    zeroline:false
+  },
+  xaxis:{
+    title:"Year",
+    rangeselector:{buttons:[
+      {count:5,label:"5y",step:"year",stepmode:"backward"},
+      {count:10,label:"10y",step:"year",stepmode:"backward"},
+      {step:"all",label:"All"}
+    ]},
+    rangeslider:{visible:true}
+  },
+  legend:{orientation:"h",y:-0.25},
+  margin:{l:40,r:20,t:40,b:100}
+};
+
+Plotly.newPlot("chart", data, layout, {responsive:true});
+</script>
+</body>
+</html>
