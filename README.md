@@ -77,14 +77,25 @@ All raw CSVs live under DATA/, with scripts to re‑generate them in SRC/.
 
 📂 Project Structure
 eclipse-menorah-protocol/
-├── RULES.md   # Pre‑registered selection & pairing rules
-├── DATA/   # Raw & processed eclipse datasets
-├── SRC/   # Parsing, midpoint, menorah & plotting scripts
-├── TESTS/   # Unit tests for rules & midpoint
-├── PREDICTIONS.md   # Future forecasts & failure modes
-├── SCOREBOARD.md   # Live tracking of passed/failed predictions
-├── .github/   # CI workflows & issue templates
-└── LICENSE   # MIT / CC‑BY license
+eclipse‑menorah/  
+├── README.md            ← overview, high‑level goals  
+├── RULES.md             ← exactly‑as‑published selection & pairing rules  
+├── DATA/  
+│   ├── eclipses.csv     ← NASA ephemeris (2000–2040) + Hebrew dates + feast flags  
+│   └── half_saros.csv   ← paired dates + pivot‑window tags  
+├── SRC/  
+│   ├── parse_eclipses.py    ← load CSV, compute Hebrew date, filter by RULES.md  
+│   ├── compute_midpoint.py  ← verify 2790‑day midpoint  
+│   └── generate_menorah.py  ← ordinal pairing & produce chart (e.g. matplotlib)  
+├── TESTS/  
+│   ├── test_rules.py        ← unit tests ensuring no off‑by‑one, correct festival flagging  
+│   └── test_midpoint.py     ← assert midpoint lands on 2 Aug 2027  
+├── PREDICTIONS.md         ← list of prospective forecasts & “failure modes”  
+├── SCOREBOARD.md          ← live tracking of which predictions have passed/failed  
+├── .github/  
+│   ├── workflows/          ← GitHub Actions to run tests on every PR  
+│   └── ISSUE_TEMPLATE.md   ← encourage bug reports & new prediction ideas  
+└── LICENSE                ← e.g. MIT or CC‑BY for maximum openness  
 
 🚀 Getting Started
 Clone this repo and cd into it:
