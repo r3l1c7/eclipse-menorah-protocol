@@ -2,90 +2,1617 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Eclipse–Menorah Interactive Timeline (2014 – 2030)</title>
-  <script src="https://cdn.plot.ly/plotly-2.29.1.min.js"></script>
+  <title>Eclipse Menorah Protocol: 2014-2030 Prophetic Timeline</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.29.1/plotly.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
   <style>
-    body{font-family: system-ui, sans-serif; margin:0; padding:2rem; background:#f9fafb}
-    #chart{width:100%; max-width:1200px; height:600px; margin:auto;}
-    h1{font-size:1.75rem; text-align:center; margin-bottom:0.5rem}
-    p.caption{font-size:0.875rem; text-align:center; color:#4b5563}
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;700&display=swap');
+    
+    :root {
+      --bg-color: #050816;
+      --bg-gradient: linear-gradient(to bottom, #050816, #0a1128, #0d1b3a);
+      --text-color: #e6f1ff;
+      --accent-color-1: #64dfdf;
+      --accent-color-2: #d90429;
+      --accent-color-3: #f8c630;
+      --accent-color-4: #7400b8;
+      --highlight: #ff4d6d;
+      --bg-card: rgba(10, 17, 40, 0.8);
+      --animation-slow: 1.5s;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+    
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .star {
+      position: absolute;
+      background-color: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle var(--animation-slow) infinite alternate;
+    }
+    
+    @keyframes twinkle {
+      0% { opacity: 0.2; }
+      100% { opacity: 0.8; }
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      position: relative;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+    
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(120deg, var(--accent-color-1), var(--accent-color-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(100, 223, 223, 0.4);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .subtitle {
+      font-size: 1.3rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+      color: var(--accent-color-3);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .description {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .timeline-container {
+      margin: 6rem 0;
+      position: relative;
+      opacity: 0;
+    }
+    
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: -3rem;
+      left: 50%;
+      width: 2px;
+      height: calc(100% + 6rem);
+      background: linear-gradient(to bottom, 
+        rgba(100, 223, 223, 0), 
+        rgba(100, 223, 223, 0.7), 
+        rgba(100, 223, 223, 0.7), 
+        rgba(100, 223, 223, 0));
+      transform: translateX(-50%);
+      z-index: -1;
+    }
+    
+    .timeline-title {
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      margin-bottom: 3rem;
+      color: var(--accent-color-1);
+      text-shadow: 0 0 10px rgba(100, 223, 223, 0.3);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    #main-timeline, #sequence-timeline {
+      width: 100%;
+      height: 600px;
+      margin: 2rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    .section {
+      margin: 6rem 0;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    .section::before {
+      content: '';
+      position: absolute;
+      top: -2rem;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, 
+        rgba(100, 223, 223, 0), 
+        rgba(100, 223, 223, 0.7), 
+        rgba(100, 223, 223, 0));
+    }
+    
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(120deg, var(--accent-color-1), var(--accent-color-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 10px rgba(100, 223, 223, 0.3);
+      position: relative;
+      display: inline-block;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--accent-color-3);
+    }
+    
+    h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--accent-color-3);
+      font-size: 1.6rem;
+      margin: 2rem 0 1rem;
+    }
+    
+    .info-box {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(100, 223, 223, 0.3);
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(100, 223, 223, 0.2);
+      transition: all 0.4s ease;
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      border-color: rgba(100, 223, 223, 0.5);
+    }
+    
+    .card h4 {
+      color: var(--accent-color-3);
+      margin-top: 0;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .highlight {
+      color: var(--highlight);
+      font-weight: 500;
+    }
+    
+    .menorah-container {
+      position: relative;
+      margin: 6rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+    }
+    
+    .menorah-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      color: var(--accent-color-3);
+      text-align: center;
+    }
+    
+    .menorah {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 1.8rem;
+      height: 450px;
+      width: 100%;
+      padding-bottom: 120px; /* Extra space for labels */
+    }
+    
+    .lamp {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.5s ease;
+      width: calc(100% / 7 - 10px); /* Distribute evenly across 7 lamps */
+      max-width: 100px;
+    }
+    
+    .lamp:hover {
+      transform: translateY(-10px);
+    }
+    
+    .lamp-stem {
+      width: 15px;
+      height: 120px;
+      background: linear-gradient(to bottom, var(--accent-color-3), #e9c46a);
+      border-radius: 5px 5px 10px 10px;
+      margin-bottom: 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 5px 15px rgba(233, 196, 106, 0.3);
+    }
+    
+    .lamp-stem::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1));
+      border-radius: 5px;
+    }
+    
+    .shamash .lamp-stem {
+      height: 180px;
+      background: linear-gradient(to bottom, var(--accent-color-1), #5390d9);
+    }
+    
+    .solar-lamp .lamp-stem {
+      background: linear-gradient(to bottom, #000, #121212);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+    
+    .lamp-base {
+      width: 30px;
+      height: 10px;
+      background: linear-gradient(to bottom, #e9c46a, #dda15e);
+      border-radius: 5px;
+      position: relative;
+      bottom: 0;
+      z-index: 0;
+    }
+    
+    .shamash .lamp-base {
+      background: linear-gradient(to bottom, #5390d9, #4361ee);
+    }
+    
+    .solar-lamp .lamp-base {
+      background: linear-gradient(to bottom, #121212, #000);
+    }
+    
+    .flame {
+      width: 30px;
+      height: 45px;
+      background: radial-gradient(ellipse at bottom, #ffdb57 0%, #ff4500 80%);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      position: relative;
+      top: -25px;
+      z-index: 2;
+      box-shadow: 0 0 20px rgba(255, 77, 0, 0.8), 0 0 40px rgba(255, 77, 0, 0.4);
+      transform-origin: center bottom;
+      margin-bottom: -25px; /* Position it at the top */
+    }
+    
+    .flame::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      filter: blur(3px);
+    }
+    
+    .lamp:nth-child(odd) .flame {
+      animation: flicker-1 2s infinite alternate;
+    }
+    
+    .lamp:nth-child(even) .flame {
+      animation: flicker-2 3s infinite alternate;
+    }
+    
+    .solar-lamp .flame {
+      background: radial-gradient(ellipse at bottom, #fff 0%, #000 40%, transparent 60%);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      animation: solar-flare 8s infinite alternate;
+    }
+    
+    @keyframes solar-flare {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
+    
+    .shamash .flame {
+      background: radial-gradient(ellipse at bottom, #64dfdf 0%, #00b4d8 80%);
+      box-shadow: 0 0 20px rgba(0, 180, 216, 0.8), 0 0 40px rgba(0, 180, 216, 0.4);
+      animation: flicker-3 1.5s infinite alternate;
+    }
+    
+    @keyframes flicker-1 {
+      0%, 100% { transform: scale(1) rotate(-2deg); opacity: 1; }
+      25% { transform: scale(0.98) rotate(0deg); opacity: 0.9; }
+      50% { transform: scale(1.02) rotate(2deg); opacity: 1; }
+      75% { transform: scale(0.95) rotate(1deg); opacity: 0.9; }
+    }
+    
+    @keyframes flicker-2 {
+      0%, 100% { transform: scale(1) rotate(2deg); opacity: 1; }
+      25% { transform: scale(1.02) rotate(0deg); opacity: 1; }
+      50% { transform: scale(0.97) rotate(-2deg); opacity: 0.9; }
+      75% { transform: scale(1.01) rotate(-1deg); opacity: 0.95; }
+    }
+    
+    @keyframes flicker-3 {
+      0%, 100% { transform: scale(1.02) rotate(0deg); opacity: 1; }
+      50% { transform: scale(0.98) rotate(0deg); opacity: 0.9; }
+    }
+    
+    .lamp-date {
+      position: absolute;
+      bottom: -38px;
+      font-size: 0.85rem;
+      color: var(--accent-color-3);
+      text-align: center;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      width: 100%;
+      background-color: rgba(5, 8, 22, 0.8);
+      padding: 4px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .lamp:hover .lamp-date {
+      color: #fff;
+      transform: translateY(5px);
+    }
+    
+    .lamp-label {
+      position: absolute;
+      bottom: -80px;
+      font-size: 0.8rem;
+      color: var(--text-color);
+      text-align: center;
+      width: 100%;
+      background-color: rgba(5, 8, 22, 0.7);
+      padding: 6px;
+      border-radius: 5px;
+      line-height: 1.4;
+    }
+    
+    .lamp-number {
+      position: absolute;
+      bottom: -120px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-color-3);
+      background: var(--bg-color);
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid var(--accent-color-3);
+      box-shadow: 0 0 15px rgba(248, 198, 48, 0.5);
+      z-index: 3;
+    }
+    
+    .menorah-base {
+      width: 80%;
+      height: 20px;
+      background: linear-gradient(to bottom, var(--accent-color-3), #e9c46a);
+      border-radius: 10px 10px 5px 5px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 0;
+      box-shadow: 0 5px 15px rgba(233, 196, 106, 0.3);
+    }
+    
+    .menorah-foot {
+      width: 60%;
+      height: 10px;
+      background: linear-gradient(to bottom, #e9c46a, #dda15e);
+      border-radius: 5px;
+      margin-top: 5px;
+      position: relative;
+      z-index: 0;
+      box-shadow: 0 5px 15px rgba(233, 196, 106, 0.3);
+    }
+    
+    .half-saros {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 4rem 0;
+      opacity: 0;
+    }
+    
+    .saros-line {
+      position: relative;
+      height: 2px;
+      background: linear-gradient(to right, var(--accent-color-2), var(--accent-color-1));
+      flex-grow: 1;
+      margin: 0 20px;
+    }
+    
+    .saros-line::after {
+      content: '3,292 days';
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--accent-color-3);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    
+    .saros-event {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    
+    .saros-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+    
+    .saros-circle.lunar {
+      background: radial-gradient(circle at 30% 30%, #d90429, #9d0208);
+    }
+    
+    .saros-circle.solar {
+      background: radial-gradient(circle at 30% 30%, #000, #121212);
+      border: 2px solid #f8c630;
+    }
+    
+    .saros-circle:hover {
+      transform: scale(1.1);
+    }
+    
+    .saros-date {
+      font-size: 0.8rem;
+      margin-top: 10px;
+      color: var(--text-color);
+      text-align: center;
+    }
+    
+    .saros-label {
+      font-size: 0.7rem;
+      color: var(--accent-color-3);
+      text-align: center;
+      max-width: 100px;
+      position: absolute;
+      bottom: -40px;
+    }
+    
+    .eclipse-sequence {
+      margin: 5rem 0;
+      position: relative;
+      opacity: 0;
+    }
+    
+    .sequence-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .sequence-table th, .sequence-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(100, 223, 223, 0.2);
+    }
+    
+    .sequence-table th {
+      font-family: 'Cinzel', serif;
+      color: var(--accent-color-3);
+      font-weight: 700;
+      font-size: 1.1rem;
+      background: rgba(10, 17, 40, 0.8);
+    }
+    
+    .sequence-table tbody tr {
+      background: rgba(10, 17, 40, 0.5);
+      transition: all 0.3s ease;
+    }
+    
+    .sequence-table tbody tr:nth-child(even) {
+      background: rgba(10, 17, 40, 0.7);
+    }
+    
+    .sequence-table tbody tr:hover {
+      background: rgba(100, 223, 223, 0.1);
+    }
+    
+    .sequence-id {
+      font-weight: 700;
+      color: var(--accent-color-1);
+    }
+    
+    .sequence-date {
+      font-weight: 500;
+    }
+    
+    .sequence-type {
+      font-weight: 500;
+    }
+    
+    .lunar-type {
+      color: var(--accent-color-2);
+    }
+    
+    .solar-type {
+      color: var(--accent-color-3);
+    }
+    
+    .venus-jupiter {
+      color: #9d4edd;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 5rem;
+      padding: 2rem;
+      background: var(--bg-card);
+      border-top: 1px solid rgba(100, 223, 223, 0.2);
+      position: relative;
+      opacity: 0;
+    }
+    
+    .footer-text {
+      color: var(--accent-color-1);
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-note {
+      color: var(--text-color);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    /* Added loader animation */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 1s ease;
+    }
+    
+    .loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .loader-moon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--accent-color-3), var(--accent-color-2));
+      position: relative;
+      animation: eclipse 2s infinite linear;
+      box-shadow: 0 0 30px rgba(217, 4, 41, 0.5);
+    }
+    
+    @keyframes eclipse {
+      0% {
+        box-shadow: 0 0 0 10px rgba(217, 4, 41, 0.1);
+      }
+      50% {
+        background: var(--accent-color-2);
+        box-shadow: 0 0 0 25px rgba(217, 4, 41, 0.2);
+      }
+      100% {
+        box-shadow: 0 0 0 10px rgba(217, 4, 41, 0.1);
+      }
+    }
+    
+    /* Connection lines between timeline points */
+    .timeline-connections {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    
+    .connection-line {
+      position: absolute;
+      background: linear-gradient(to right, var(--accent-color-1), var(--accent-color-2));
+      height: 2px;
+      z-index: -1;
+      transform-origin: left center;
+    }
+    
+    .daniel-counts {
+      display: flex;
+      justify-content: space-between;
+      margin: 4rem 0;
+      position: relative;
+      opacity: 0;
+    }
+    
+    .daniel-counts::before {
+      content: '';
+      position: absolute;
+      top: 30px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, 
+        rgba(100, 223, 223, 0.3), 
+        rgba(100, 223, 223, 0.7), 
+        rgba(100, 223, 223, 0.3));
+      z-index: 0;
+    }
+    
+    .daniel-count {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .daniel-marker {
+      width: 60px;
+      height: 60px;
+      background: var(--bg-card);
+      border: 2px solid var(--accent-color-3);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: var(--accent-color-3);
+      box-shadow: 0 0 15px rgba(248, 198, 48, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .daniel-marker:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(248, 198, 48, 0.5);
+    }
+    
+    .daniel-date {
+      font-size: 0.9rem;
+      color: var(--text-color);
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    
+    .daniel-label {
+      font-size: 0.8rem;
+      color: var(--accent-color-1);
+      text-align: center;
+      max-width: 120px;
+    }
+    
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .container {
+        padding: 2rem 1rem;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .menorah {
+        gap: 1rem;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding-bottom: 100px;
+        overflow-x: visible;
+        transform: scale(0.85);
+        width: 120%;
+        margin-left: -10%;
+      }
+      
+      .lamp {
+        min-width: auto;
+        max-width: 80px;
+      }
+      
+      .lamp-date {
+        font-size: 0.8rem;
+        width: 100%;
+      }
+      
+      .lamp-label {
+        font-size: 0.7rem;
+        width: 100%;
+      }
+      
+      .half-saros {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      
+      .saros-line {
+        width: 2px;
+        height: 100px;
+        margin: 20px 0;
+        background: linear-gradient(to bottom, var(--accent-color-2), var(--accent-color-1));
+      }
+      
+      .saros-line::after {
+        top: 50%;
+        left: 25px;
+        transform: translateY(-50%);
+      }
+      
+      .daniel-counts {
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+      }
+      
+      .daniel-counts::before {
+        width: 2px;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        background: linear-gradient(to bottom, 
+          rgba(100, 223, 223, 0.3), 
+          rgba(100, 223, 223, 0.7), 
+          rgba(100, 223, 223, 0.3));
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Eclipse & Prophetic‑Count Timeline 2014 → 2030</h1>
-  <p class="caption">Hover a marker for details • Drag to zoom • Scroll to pan</p>
-  <div id="chart"></div>
-
-<script>
-// === Data arrays ===
-const parseDate = d => new Date(d);
-// Major eclipse "lamps"
-const lamps = [
-  {d:"2014-04-15", label:"L1 • Total lunar – Passover"},
-  {d:"2014-10-08", label:"L2 • Total lunar – Sukkot"},
-  {d:"2023-10-14", label:"L3 • Annular solar – Ring‑of‑Fire"},
-  {d:"2027-08-02", label:"L4 • Total solar – Egypt darkness"},
-  {d:"2028-12-31", label:"L5 • Total lunar – 10 Tevet"},
-  {d:"2029-06-26", label:"L6 • Total lunar – 17 Tammuz"},
-  {d:"2029-12-20", label:"L7 • Total lunar – 24 Kislev"},
-  {d:"2030-11-25", label:"L8 • Total solar – Jubilee echo"}
-];
-
-// Daniel counts (start 2023‑10‑07)
-const daniel = [
-  {d:"2027-03-20", label:"1 260 d – Eq / 11 Adar II"},
-  {d:"2027-04-19", label:"1 290 d – 12 Nisan / Fast Firstborn"},
-  {d:"2027-06-03", label:"1 335 d – 27 Iyyar / Yom Yerushalayim +2"}
-];
-
-// Venus–Jupiter conjunctions
-const vj = [
-  {d:"2026-02-01", label:"Conj • 0.27°"},
-  {d:"2029-08-08", label:"Conj • 0.32°"},
-  {d:"2030-06-19", label:"Conj • 0.48°"}
-];
-
-// Helper to build trace
-function makeTrace(arr, y, marker, name){
-  return {
-    x: arr.map(o=>parseDate(o.d)),
-    y: Array(arr.length).fill(y),
-    text: arr.map(o=>o.label),
-    mode:"markers",
-    name,
-    hovertemplate:"%{text}<br>%{x|%d %b %Y}<extra></extra>",
-    marker
-  };
-}
-
-const data = [
-  makeTrace(lamps, 2, {size:14, color:"#f97316", symbol:"x"}, "Eclipse Lamps"),
-  makeTrace(daniel, 1, {size:12, color:"#10b981", symbol:"circle"}, "Daniel Counts"),
-  makeTrace(vj, 0, {size:10, color:"#3b82f6", symbol:"diamond"}, "Venus–Jupiter")
-];
-
-const layout = {
-  height:600,
-  yaxis:{
-    tickvals:[0,1,2],
-    ticktext:["Conjunctions","Daniel Counts","Eclipses"],
-    showgrid:false,
-    zeroline:false
-  },
-  xaxis:{
-    title:"Year",
-    rangeselector:{buttons:[
-      {count:5,label:"5y",step:"year",stepmode:"backward"},
-      {count:10,label:"10y",step:"year",stepmode:"backward"},
-      {step:"all",label:"All"}
-    ]},
-    rangeslider:{visible:true}
-  },
-  legend:{orientation:"h",y:-0.25},
-  margin:{l:40,r:20,t:40,b:100}
-};
-
-Plotly.newPlot("chart", data, layout, {responsive:true});
-</script>
+  <!-- Loader -->
+  <div class="loader">
+    <div class="loader-moon"></div>
+  </div>
+  
+  <!-- Background Stars -->
+  <div class="stars" id="stars"></div>
+  
+  <div class="container">
+    <header>
+      <h1>ECLIPSE MENORAH PROTOCOL</h1>
+      <p class="subtitle">Prophetic Timeline: 2014-2030</p>
+      <p class="description">A celestial pattern of lunar and solar eclipses forming a divine menorah of light that spans from the 2014-2015 blood moons tetrad to the prophetic culmination in 2030.</p>
+    </header>
+    
+    <div class="section">
+      <h2>Divine Celestial Blueprint</h2>
+      
+      <div class="info-box">
+        <h3>The Prophetic Eclipse Sequence</h3>
+        <p>Beginning with the 2014-2015 blood moons tetrad and anchored by the October 7, 2023 event, a remarkable pattern of eclipses unfolds through 2030, aligning precisely with Biblical feast days and prophetic timing.</p>
+        <p>This sequence forms a celestial menorah with seven primary "lamps" - eclipse events that mark out key prophetic waypoints anchored to Jewish feast days and historical patterns.</p>
+      </div>
+      
+      <div class="timeline-container">
+        <h3 class="timeline-title">Complete Eclipse Timeline (2014-2030)</h3>
+        <div id="main-timeline"></div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>Half-Saros Eclipse Pairings</h2>
+      <p>Each blood moon from the 2014-2015 tetrad aligns with a future solar eclipse, separated by exactly 3,292 days (±4 hours) - a perfect half-saros cycle that validates the physics-based forecast:</p>
+      
+      <div class="half-saros">
+        <div class="saros-event">
+          <div class="saros-circle lunar">
+            <span style="color: white; font-weight: bold;">L1</span>
+          </div>
+          <div class="saros-date">Apr 15, 2014</div>
+          <div class="saros-label">Total Lunar Eclipse (Passover)</div>
+        </div>
+        
+        <div class="saros-line"></div>
+        
+        <div class="saros-event">
+          <div class="saros-circle solar">
+            <span style="color: white; font-weight: bold;">•</span>
+          </div>
+          <div class="saros-date">Apr 8, 2024</div>
+          <div class="saros-label">Total Solar Eclipse</div>
+        </div>
+      </div>
+      
+      <div class="half-saros">
+        <div class="saros-event">
+          <div class="saros-circle lunar">
+            <span style="color: white; font-weight: bold;">L2</span>
+          </div>
+          <div class="saros-date">Oct 8, 2014</div>
+          <div class="saros-label">Total Lunar Eclipse (Sukkot)</div>
+        </div>
+        
+        <div class="saros-line"></div>
+        
+        <div class="saros-event">
+          <div class="saros-circle solar">
+            <span style="color: white; font-weight: bold;">L3</span>
+          </div>
+          <div class="saros-date">Oct 14, 2023</div>
+          <div class="saros-label">Annular Solar Eclipse (Ring of Fire)</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="menorah-container">
+      <h3 class="menorah-title">The Eclipse Menorah (2014-2030)</h3>
+      
+      <div class="menorah">
+        <div class="lamp">
+          <div class="lamp-number">L1</div>
+          <div class="flame"></div>
+          <div class="lamp-stem"></div>
+          <div class="lamp-base"></div>
+          <div class="lamp-date">Apr 15, 2014</div>
+          <div class="lamp-label">Total Lunar Eclipse (Passover)</div>
+        </div>
+        
+        <div class="lamp">
+          <div class="lamp-number">L2</div>
+          <div class="flame"></div>
+          <div class="lamp-stem"></div>
+          <div class="lamp-base"></div>
+          <div class="lamp-date">Oct 8, 2014</div>
+          <div class="lamp-label">Total Lunar Eclipse (Sukkot)</div>
+        </div>
+        
+        <div class="lamp solar-lamp">
+          <div class="lamp-number">L3</div>
+          <div class="flame"></div>
+          <div class="lamp-stem"></div>
+          <div class="lamp-base"></div>
+          <div class="lamp-date">Oct 14, 2023</div>
+          <div class="lamp-label">Annular Solar Eclipse (Ring of Fire)</div>
+        </div>
+        
+        <div class="lamp shamash solar-lamp">
+          <div class="lamp-number">L4</div>
+          <div class="flame"></div>
+          <div class="lamp-stem"></div>
+          <div class="lamp-base"></div>
+          <div class="lamp-date">Aug 2, 2027</div>
+          <div class="lamp-label">Total Solar Eclipse (Egypt Darkness)</div>
+        </div>
+        
+        <div class="lamp">
+          <div class="lamp-number">L5</div>
+          <div class="flame"></div>
+          <div class="lamp-stem"></div>
+          <div class="lamp-base"></div>
+          <div class="lamp-date">Dec 31, 2028</div>
+          <div class="lamp-label">Total Lunar Eclipse (10 Tevet)</div>
+        </div>
+        
+        <div class="lamp">
+          <div class="lamp-number">L6</div>
+          <div class="flame"></div>
+          <div class="lamp-stem"></div>
+          <div class="lamp-base"></div>
+          <div class="lamp-date">Jun 26, 2029</div>
+          <div class="lamp-label">Total Lunar Eclipse (17 Tammuz)</div>
+        </div>
+        
+        <div class="lamp">
+          <div class="lamp-number">L7</div>
+          <div class="flame"></div>
+          <div class="lamp-stem"></div>
+          <div class="lamp-base"></div>
+          <div class="lamp-date">Dec 20, 2029</div>
+          <div class="lamp-label">Total Lunar Eclipse (24 Kislev)</div>
+        </div>
+      </div>
+      
+      <div class="menorah-base"></div>
+      <div class="menorah-foot"></div>
+    </div>
+    
+    <div class="section">
+      <h2>Post-Anchor Timeline</h2>
+      <p>Anchored at the Simchat Torah trigger (October 7, 2023), the sequence unfolds toward the Autumn 2030 Yom Kippur/Jubilee window:</p>
+      
+      <div class="eclipse-sequence">
+        <table class="sequence-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date (UTC)</th>
+              <th>Type</th>
+              <th>Feast/Fast Context</th>
+              <th>Prophetic Significance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="sequence-id">L3</td>
+              <td class="sequence-date">Oct 14, 2023</td>
+              <td class="sequence-type solar-type">Annular Solar</td>
+              <td>7 days after Simchat Torah massacre</td>
+              <td>Half-Saros of L2; seals war-week<br>(Joel 2:31; Rev 6:12-17)</td>
+            </tr>
+            <tr>
+              <td class="sequence-id">-</td>
+              <td class="sequence-date">Feb 1, 2026</td>
+              <td class="sequence-type venus-jupiter">Venus-Jupiter Conjunction</td>
+              <td>0.27° separation</td>
+              <td>Celestial alignment marker</td>
+            </tr>
+            <tr>
+              <td class="sequence-id">L4</td>
+              <td class="sequence-date">Aug 2, 2027</td>
+              <td class="sequence-type solar-type">Total Solar</td>
+              <td>Mid-week plague darkness over Egypt</td>
+              <td>1,395 days / Essene midpoint<br>(Exodus 10:21-23)</td>
+            </tr>
+            <tr>
+              <td class="sequence-id">L5</td>
+              <td class="sequence-date">Dec 31, 2028</td>
+              <td class="sequence-type lunar-type">Total Lunar</td>
+              <td>Full moon of Tevet (near 10 Tevet fast)</td>
+              <td>Siege-month signal<br>(Jeremiah 52:4-6)</td>
+            </tr>
+            <tr>
+              <td class="sequence-id">L6</td>
+              <td class="sequence-date">Jun 26, 2029</td>
+              <td class="sequence-type lunar-type">Total Lunar</td>
+              <td>Full moon of Tammuz (near 17 Tammuz fast)</td>
+              <td>Siege-week warning<br>(Zechariah 14:1-2)</td>
+            </tr>
+            <tr>
+              <td class="sequence-id">-</td>
+              <td class="sequence-date">Aug 8, 2029</td>
+              <td class="sequence-type venus-jupiter">Venus-Jupiter Conjunction</td>
+              <td>0.32° separation</td>
+              <td>Celestial alignment marker</td>
+            </tr>
+            <tr>
+              <td class="sequence-id">L7</td>
+              <td class="sequence-date">Dec 20, 2029</td>
+              <td class="sequence-type lunar-type">Total Lunar</td>
+              <td>Full moon of Kislev (near Hanukkah eve)</td>
+              <td>Rededication echo<br>(1 Maccabees 4:52-53; John 10:22-23)</td>
+            </tr>
+            <tr>
+              <td class="sequence-id">L8</td>
+              <td class="sequence-date">Oct 6-7, 2030</td>
+              <td class="sequence-type">Rabbinic Yom Kippur</td>
+              <td>10 Tishri - Day of Atonement</td>
+              <td>Return of Christ<br>(Leviticus 16; Acts 1:11)</td>
+            </tr>
+            <tr>
+              <td class="sequence-id">L8</td>
+              <td class="sequence-date">Oct 28, 2030</td>
+              <td class="sequence-type">Essene Yom Kippur</td>
+              <td>10 Tishri - Day of Atonement</td>
+              <td>2,578 days / Jubilee echo<br>(Leviticus 25:9-13)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>Daniel's Prophetic Counts</h2>
+      <p>From the October 7, 2023 anchor date, three key prophetic counts from the Book of Daniel mark significant milestones:</p>
+      
+      <div class="daniel-counts">
+        <div class="daniel-count">
+          <div class="daniel-marker">1,260</div>
+          <div class="daniel-date">Mar 20, 2027</div>
+          <div class="daniel-label">11 Adar II</div>
+        </div>
+        
+        <div class="daniel-count">
+          <div class="daniel-marker">1,290</div>
+          <div class="daniel-date">Apr 19, 2027</div>
+          <div class="daniel-label">12 Nisan</div>
+        </div>
+        
+        <div class="daniel-count">
+          <div class="daniel-marker">1,335</div>
+          <div class="daniel-date">Jun 3, 2027</div>
+          <div class="daniel-label">27 Iyyar</div>
+        </div>
+      </div>
+      
+      <div class="info-box">
+        <h3>Culmination Point</h3>
+        <p>Whether by the rabbinic window (October 6-7, 2030) or the Essene date (October 28, 2030), the Day of Atonement marks the prophetic climax—no further bright eclipses are load-bearing, and the Jubilee trumpet sounds (Leviticus 25:9-13).</p>
+        <p>This sequence of seven "lamps" plus the culmination point (L8) forms a complete menorah pattern that spans approximately 16 years from the first blood moon to the final prophetic fulfillment.</p>
+      </div>
+    </div>
+    
+    <div class="timeline-container">
+      <h3 class="timeline-title">Daniel's Timeline from October 7, 2023</h3>
+      <div id="sequence-timeline"></div>
+    </div>
+    
+    <div class="footer">
+      <p class="footer-text">"The sun will be turned to darkness and the moon to blood before the great and dreadful day of the LORD comes."</p>
+      <p class="footer-note">Joel 2:31</p>
+    </div>
+  </div>
+  
+  <script>
+    // Create background stars
+    function createStars() {
+      const stars = document.getElementById('stars');
+      const starCount = 200;
+      
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        
+        // Random position
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        
+        // Random size
+        const size = Math.random() * 2;
+        
+        // Random animation delay
+        const delay = Math.random() * 3;
+        
+        star.style.left = `${x}%`;
+        star.style.top = `${y}%`;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.animationDelay = `${delay}s`;
+        
+        stars.appendChild(star);
+      }
+    }
+    
+    // Hide loader after content loads
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        document.querySelector('.loader').classList.add('hidden');
+      }, 1500);
+      
+      createStars();
+      initializeAnimations();
+      createTimelines();
+    });
+    
+    // Initialize animations
+    function initializeAnimations() {
+      // Register ScrollTrigger plugin
+      gsap.registerPlugin(ScrollTrigger);
+      
+      // Animate header elements
+      gsap.to("h1", { opacity: 1, y: 0, duration: 1, delay: 0.5 });
+      gsap.to(".subtitle", { opacity: 1, y: 0, duration: 1, delay: 0.7 });
+      gsap.to(".description", { opacity: 1, y: 0, duration: 1, delay: 0.9 });
+      
+      // Animate sections on scroll
+      gsap.utils.toArray(".section").forEach(section => {
+        gsap.to(section, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            toggleActions: "play none none none"
+          }
+        });
+      });
+      
+      // Animate timeline containers
+      gsap.utils.toArray(".timeline-container").forEach(container => {
+        gsap.to(container, {
+          opacity: 1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: container,
+            start: "top 80%",
+            toggleActions: "play none none none"
+          }
+        });
+        
+        gsap.to(container.querySelector(".timeline-title"), {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: 0.3,
+          scrollTrigger: {
+            trigger: container,
+            start: "top 80%",
+            toggleActions: "play none none none"
+          }
+        });
+      });
+      
+      // Animate plotly charts
+      gsap.utils.toArray("#main-timeline, #sequence-timeline").forEach(chart => {
+        gsap.to(chart, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: 0.5,
+          scrollTrigger: {
+            trigger: chart,
+            start: "top 80%",
+            toggleActions: "play none none none"
+          }
+        });
+      });
+      
+      // Animate info boxes
+      gsap.utils.toArray(".info-box").forEach(box => {
+        gsap.to(box, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: box,
+            start: "top 80%",
+            toggleActions: "play none none none"
+          }
+        });
+      });
+      
+      // Animate cards
+      gsap.utils.toArray(".card").forEach((card, i) => {
+        gsap.to(card, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: 0.2 * i,
+          scrollTrigger: {
+            trigger: card,
+            start: "top 90%",
+            toggleActions: "play none none none"
+          }
+        });
+      });
+      
+      // Animate menorah
+      gsap.to(".menorah-container", {
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".menorah-container",
+          start: "top 80%",
+          toggleActions: "play none none none"
+        }
+      });
+      
+      // Animate each lamp with staggered delay
+      gsap.utils.toArray(".lamp").forEach((lamp, i) => {
+        gsap.fromTo(lamp, 
+          { y: 100, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1, delay: 0.2 * i, 
+            scrollTrigger: {
+              trigger: ".menorah",
+              start: "top 80%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
+      });
+      
+      // Animate half-saros sections
+      gsap.utils.toArray(".half-saros").forEach((saros, i) => {
+        gsap.to(saros, {
+          opacity: 1,
+          duration: 1,
+          delay: 0.3 * i,
+          scrollTrigger: {
+            trigger: saros,
+            start: "top 80%",
+            toggleActions: "play none none none"
+          }
+        });
+      });
+      
+      // Animate eclipse sequence
+      gsap.to(".eclipse-sequence", {
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".eclipse-sequence",
+          start: "top 80%",
+          toggleActions: "play none none none"
+        }
+      });
+      
+      // Animate daniel counts
+      gsap.to(".daniel-counts", {
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".daniel-counts",
+          start: "top 80%",
+          toggleActions: "play none none none"
+        }
+      });
+      
+      // Animate footer
+      gsap.to(".footer", {
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".footer",
+          start: "top 90%",
+          toggleActions: "play none none none"
+        }
+      });
+    }
+    
+    // Create the timeline visualizations
+    function createTimelines() {
+      // Data for the main timeline
+      const eclipseData = [
+        { date: new Date(2014, 3, 15), type: 'Total Lunar', label: 'L1 • Total Lunar – Passover', group: 'Blood Moon Tetrad' },
+        { date: new Date(2014, 9, 8), type: 'Total Lunar', label: 'L2 • Total Lunar – Sukkot', group: 'Blood Moon Tetrad' },
+        { date: new Date(2023, 9, 14), type: 'Annular Solar', label: 'L3 • Annular Solar – Ring of Fire', group: 'Post-Anchor' },
+        { date: new Date(2026, 1, 1), type: 'Venus-Jupiter', label: 'Venus-Jupiter Conjunction (0.27°)', group: 'Celestial Alignment' },
+        { date: new Date(2027, 7, 2), type: 'Total Solar', label: 'L4 • Total Solar – Egypt Darkness', group: 'Post-Anchor' },
+        { date: new Date(2028, 11, 31), type: 'Total Lunar', label: 'L5 • Total Lunar – 10 Tevet', group: 'Post-Anchor' },
+        { date: new Date(2029, 5, 26), type: 'Total Lunar', label: 'L6 • Total Lunar – 17 Tammuz', group: 'Post-Anchor' },
+        { date: new Date(2029, 7, 8), type: 'Venus-Jupiter', label: 'Venus-Jupiter Conjunction (0.32°)', group: 'Celestial Alignment' },
+        { date: new Date(2029, 11, 20), type: 'Total Lunar', label: 'L7 • Total Lunar – 24 Kislev', group: 'Post-Anchor' },
+        { date: new Date(2030, 9, 7), type: 'Culmination', label: 'L8 • Rabbinic Yom Kippur', group: 'Culmination' },
+        { date: new Date(2030, 9, 28), type: 'Culmination', label: 'L8 • Essene Yom Kippur', group: 'Culmination' }
+      ];
+      
+      // Create traces for different groups
+      const bloodMoonTrace = {
+        x: eclipseData.filter(d => d.group === 'Blood Moon Tetrad').map(d => d.date),
+        y: eclipseData.filter(d => d.group === 'Blood Moon Tetrad').map(() => 0),
+        text: eclipseData.filter(d => d.group === 'Blood Moon Tetrad').map(d => d.label),
+        customdata: eclipseData.filter(d => d.group === 'Blood Moon Tetrad').map(d => d.type),
+        mode: 'markers',
+        type: 'scatter',
+        name: 'Blood Moon Tetrad (2014-2015)',
+        hovertemplate: '%{text}<br>%{x|%b %d, %Y}<extra></extra>',
+        marker: {
+          size: 18,
+          color: '#d90429',
+          symbol: 'circle',
+          line: {
+            width: 2,
+            color: '#fff'
+          }
+        }
+      };
+      
+      const postAnchorTrace = {
+        x: eclipseData.filter(d => d.group === 'Post-Anchor').map(d => d.date),
+        y: eclipseData.filter(d => d.group === 'Post-Anchor').map(() => 0),
+        text: eclipseData.filter(d => d.group === 'Post-Anchor').map(d => d.label),
+        customdata: eclipseData.filter(d => d.group === 'Post-Anchor').map(d => d.type),
+        mode: 'markers',
+        type: 'scatter',
+        name: 'Post-Anchor Eclipses (2023-2029)',
+        hovertemplate: '%{text}<br>%{x|%b %d, %Y}<extra></extra>',
+        marker: {
+          size: 16,
+          color: eclipseData.filter(d => d.group === 'Post-Anchor').map(d => 
+            d.type.includes('Solar') ? '#f8c630' : '#64dfdf'
+          ),
+          symbol: eclipseData.filter(d => d.group === 'Post-Anchor').map(d => 
+            d.type.includes('Solar') ? 'diamond' : 'circle'
+          ),
+          line: {
+            width: 2,
+            color: '#fff'
+          }
+        }
+      };
+      
+      const celestialTrace = {
+        x: eclipseData.filter(d => d.group === 'Celestial Alignment').map(d => d.date),
+        y: eclipseData.filter(d => d.group === 'Celestial Alignment').map(() => 0),
+        text: eclipseData.filter(d => d.group === 'Celestial Alignment').map(d => d.label),
+        customdata: eclipseData.filter(d => d.group === 'Celestial Alignment').map(d => d.type),
+        mode: 'markers',
+        type: 'scatter',
+        name: 'Venus-Jupiter Conjunctions',
+        hovertemplate: '%{text}<br>%{x|%b %d, %Y}<extra></extra>',
+        marker: {
+          size: 12,
+          color: '#9d4edd',
+          symbol: 'star',
+          line: {
+            width: 1,
+            color: '#fff'
+          }
+        }
+      };
+      
+      const culminationTrace = {
+        x: eclipseData.filter(d => d.group === 'Culmination').map(d => d.date),
+        y: eclipseData.filter(d => d.group === 'Culmination').map(() => 0),
+        text: eclipseData.filter(d => d.group === 'Culmination').map(d => d.label),
+        customdata: eclipseData.filter(d => d.group === 'Culmination').map(d => d.type),
+        mode: 'markers',
+        type: 'scatter',
+        name: 'Prophetic Culmination (2030)',
+        hovertemplate: '%{text}<br>%{x|%b %d, %Y}<extra></extra>',
+        marker: {
+          size: 20,
+          color: '#f8c630',
+          symbol: 'cross',
+          line: {
+            width: 2,
+            color: '#fff'
+          }
+        }
+      };
+      
+      const mainLayout = {
+        title: {
+          text: 'Eclipse Menorah Protocol Timeline (2014-2030)',
+          font: {
+            family: 'Cinzel, serif',
+            size: 18,
+            color: '#64dfdf'
+          }
+        },
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(10,17,40,0.4)',
+        font: {
+          family: 'Inter, sans-serif',
+          color: '#e6f1ff'
+        },
+        xaxis: {
+          title: {
+            text: 'Year',
+            font: {
+              family: 'Inter, sans-serif',
+              size: 14,
+              color: '#e6f1ff'
+            }
+          },
+          showgrid: true,
+          gridcolor: 'rgba(100, 223, 223, 0.2)',
+          tickformat: '%Y',
+          rangeslider: {
+            visible: true,
+            bgcolor: 'rgba(10,17,40,0.6)'
+          }
+        },
+        yaxis: {
+          showticklabels: false,
+          showgrid: false,
+          zeroline: false
+        },
+        shapes: [
+          // Vertical line at Oct 7, 2023
+          {
+            type: 'line',
+            x0: new Date(2023, 9, 7),
+            x1: new Date(2023, 9, 7),
+            y0: -0.1,
+            y1: 0.1,
+            line: {
+              color: '#d90429',
+              width: 2,
+              dash: 'dot'
+            }
+          }
+        ],
+        annotations: [
+          {
+            x: new Date(2023, 9, 7),
+            y: 0.12,
+            text: 'Oct 7, 2023 Anchor',
+            showarrow: false,
+            font: {
+              family: 'Inter, sans-serif',
+              color: '#d90429',
+              size: 12
+            }
+          }
+        ],
+        legend: {
+          x: 0,
+          y: 1.1,
+          orientation: 'h',
+          bgcolor: 'rgba(10,17,40,0.7)',
+          bordercolor: 'rgba(100, 223, 223, 0.3)',
+          borderwidth: 1,
+          font: {
+            family: 'Inter, sans-serif',
+            size: 12,
+            color: '#e6f1ff'
+          }
+        },
+        margin: {
+          l: 40,
+          r: 40,
+          t: 50,
+          b: 80
+        },
+        hovermode: 'closest'
+      };
+      
+      // Create the main plot
+      Plotly.newPlot('main-timeline', [bloodMoonTrace, postAnchorTrace, celestialTrace, culminationTrace], mainLayout, {responsive: true});
+      
+      // Data for the Daniel Timeline
+      const danielData = [
+        { date: new Date(2023, 9, 7), label: 'Anchor Point (Oct 7, 2023)', marker: { size: 18, color: '#d90429', symbol: 'circle-open' } },
+        { date: new Date(2027, 2, 20), label: '1,260 Days (Mar 20, 2027)', marker: { size: 16, color: '#f8c630', symbol: 'diamond' } },
+        { date: new Date(2027, 3, 19), label: '1,290 Days (Apr 19, 2027)', marker: { size: 16, color: '#f8c630', symbol: 'diamond' } },
+        { date: new Date(2027, 5, 3), label: '1,335 Days (Jun 3, 2027)', marker: { size: 16, color: '#f8c630', symbol: 'diamond' } },
+        { date: new Date(2027, 7, 2), label: 'Total Solar Eclipse (Aug 2, 2027)', marker: { size: 16, color: '#000', symbol: 'diamond', line: { width: 2, color: '#f8c630' } } },
+        { date: new Date(2030, 9, 7), label: 'Rabbinic Yom Kippur (Oct 7, 2030)', marker: { size: 18, color: '#f8c630', symbol: 'cross' } },
+        { date: new Date(2030, 9, 28), label: 'Essene Yom Kippur (Oct 28, 2030)', marker: { size: 18, color: '#f8c630', symbol: 'cross' } }
+      ];
+      
+      const danielTrace = {
+        x: danielData.map(d => d.date),
+        y: Array(danielData.length).fill(0),
+        text: danielData.map(d => d.label),
+        mode: 'markers+text',
+        type: 'scatter',
+        textposition: 'top center',
+        textfont: {
+          family: 'Inter, sans-serif',
+          size: 11,
+          color: '#e6f1ff'
+        },
+        hovertemplate: '%{text}<br>%{x|%b %d, %Y}<extra></extra>',
+        marker: danielData.map(d => d.marker)
+      };
+      
+      const sequenceLayout = {
+        title: {
+          text: 'Daniel\'s Prophetic Sequence (From Oct 7, 2023)',
+          font: {
+            family: 'Cinzel, serif',
+            size: 18,
+            color: '#64dfdf'
+          }
+        },
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(10,17,40,0.4)',
+        font: {
+          family: 'Inter, sans-serif',
+          color: '#e6f1ff'
+        },
+        xaxis: {
+          title: {
+            text: 'Date',
+            font: {
+              family: 'Inter, sans-serif',
+              size: 14,
+              color: '#e6f1ff'
+            }
+          },
+          showgrid: true,
+          gridcolor: 'rgba(100, 223, 223, 0.2)',
+          tickformat: '%b %Y'
+        },
+        yaxis: {
+          showticklabels: false,
+          showgrid: false,
+          zeroline: false
+        },
+        shapes: [
+          // Connecting lines between points
+          ...Array(danielData.length - 1).fill().map((_, i) => ({
+            type: 'line',
+            x0: danielData[i].date,
+            x1: danielData[i + 1].date,
+            y0: 0,
+            y1: 0,
+            line: {
+              color: 'rgba(100, 223, 223, 0.5)',
+              width: 2
+            }
+          }))
+        ],
+        margin: {
+          l: 40,
+          r: 40,
+          t: 50,
+          b: 120
+        },
+        hovermode: 'closest'
+      };
+      
+      // Create the sequence plot
+      Plotly.newPlot('sequence-timeline', [danielTrace], sequenceLayout, {responsive: true});
+    }
+  </script>
 </body>
 </html>
